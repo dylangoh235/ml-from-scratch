@@ -114,10 +114,10 @@ class RNN(Layer):
 
         for t in reversed(range(time_steps)):
             dWy = dWy + np.dot(self.h[:, t].T, grad[:, t])
-            # dby = dby + grad[:,t]
+            dby = dby + grad[:,t]
             d_h = np.dot(grad[:, t], self.Wy.T) * self.activation.backward(self.z[:, t])
             dh_next[:, t] = np.dot(d_h, self.WX.T)
-            # dbh = dbh + d_h
+            dbh = dbh + d_h
             for h_t in reversed(np.arange(max(0, t - self.truncate), t+1)):
                 dWh = dWh + np.dot(d_h.T, self.h[:, h_t-1])
                 dWX = dWX + np.dot(d_h.T, self.X[:, h_t]).T
