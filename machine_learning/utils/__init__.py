@@ -3,3 +3,4 @@ from .activation import *
 from .loss import *
 from .regularization import *
 from .optimization import *
+from .network import *
